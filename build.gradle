@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'com.scimmia'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.alibaba', name: 'easyexcel', version: '1.1.2-beat1'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+}
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+}
