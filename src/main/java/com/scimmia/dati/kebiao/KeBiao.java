@@ -18,13 +18,39 @@ public class KeBiao {
             "《支行过程管控与客户维护》	李春萌",
             "《支行精细化管理》	孙晓琳",
             "《服务辖区网格化营销实践及操作要点》	王纪昌",
-            "《厅堂网格化营销与实战指导》	齐丽敏",
+            "《厅堂网格化营销与实战指导》	周冉",
             "《以省联社123456为引领 推进代理型网点建设》	王保君",
             "网点转型思路再探讨	班主任",
             "《支行信贷业务拓展》	李晓雷",
             "《潍坊农商银行网点转型回顾与前景展望》	郑传伟",
             "《莘县农商银行网点转型发展经验交流》	魏会超",
             "《网点转型导入流程与工作要点》	李明哲"
+    };
+
+    String[] orgs = new String[]{
+            "王纪昌	阳谷农商银行",
+            "孙晓琳	聊城农商银行",
+            "班主任	省联社",
+            "李金玉	邹平农商银行",
+            "王保君	潍坊农商银行",
+            "韩风华	阳谷农商银行",
+            "闫友田	枣庄农商银行",
+            "李晓雷	兰陵农商银行",
+            "魏会超	莘县农商银行",
+            "殷佳丽	聊城农商银行",
+            "王攀	禹城农商银行",
+            "陈明	济南农商银行",
+            "周冉	聊城农商银行",
+            "万传玲	省联社",
+            "张万里	省联社",
+            "刘建光	省联社",
+            "李春萌	邹平农商银行",
+            "齐丽敏	聊城农商银行",
+            "班主任	省联社",
+            "汤  璞	阳谷农商银行",
+            "班主任	省联社",
+            "郑传伟	潍坊农商银行",
+            "李明哲	潍坊农商银行"
     };
     public static void main(String[] args) {
         KeBiao k = new KeBiao();
@@ -41,6 +67,21 @@ public class KeBiao {
                 c.setName(temp[0]);
                 c.setTeacher(temp[1]);
                 al.put(temp[1],c);
+            }
+        }
+        System.out.println("");
+        return al;
+    }
+    HashMap<String,Course> initOrgs(){
+        HashMap<String,Course> al = new HashMap<>();
+        for (String course :
+                orgs) {
+            String[] temp = StringUtils.split(course,"\t");
+            if (temp.length == 2){
+                Course c = new Course();
+                c.setOrg(temp[1]);
+                c.setTeacher(temp[0]);
+                al.put(temp[0],c);
             }
         }
         System.out.println("");
@@ -126,6 +167,7 @@ public class KeBiao {
 
     LinkedHashMap<String,LinkedList<List<Object>>> buildClasses(List<Object> data){
         HashMap<String,Course> al = initCourses();
+        HashMap<String,Course> all = initOrgs();
 
         LinkedHashMap<String,LinkedList<List<Object>>> allSheet = new LinkedHashMap<>(  );
         System.out.println(((List<Object>)data.get(0)).get(2));
@@ -162,6 +204,7 @@ public class KeBiao {
                 Course course =al.get(teacher);
                 dataLine.add(course.getName());
                 dataLine.add(course.getTeacher());
+                dataLine.add(all.getOrDefault(course.getTeacher(),new Course()).getOrg());
                 datas.add(dataLine);
             }
         }

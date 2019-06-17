@@ -18,7 +18,7 @@ public class Fenban {
     public static void main(String[] args) {
 //        readFileByLines("h:/ShiDaiGuangHuaquestions");
         Fenban fenban = new Fenban();
-        fenban.readExcel("6.xls");
+        fenban.readExcel("5.xlsx");
     }
     public void readExcel(String filename) {
         try {
@@ -52,15 +52,15 @@ public class Fenban {
             for (String key:maps.keySet()){
                 System.out.println(key+'\t'+maps.get(key));
             }
-//            writeV2003(all);
-            System.out.println("ss");
+            writeV2003(all);
+//            System.out.println("ss");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void writeV2003(LinkedList<LinkedList<List<Object>>> all) throws IOException {
-        OutputStream out = new FileOutputStream("h:\\2003.xls");
+        OutputStream out = new FileOutputStream("h:\\2004.xls");
         ExcelWriter writer = EasyExcelFactory.getWriter(out, ExcelTypeEnum.XLS,true);
         //写第一个sheet, sheet1  数据全是List<String> 无模型映射关系
         Sheet sheet1 = new Sheet(1, 3);
