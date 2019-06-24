@@ -18,7 +18,7 @@ public class Fenban {
     public static void main(String[] args) {
 //        readFileByLines("h:/ShiDaiGuangHuaquestions");
         Fenban fenban = new Fenban();
-        fenban.readExcel("5.xlsx");
+        fenban.readExcel("7.xlsx");
     }
     public void readExcel(String filename) {
         try {
@@ -60,7 +60,7 @@ public class Fenban {
     }
 
     public void writeV2003(LinkedList<LinkedList<List<Object>>> all) throws IOException {
-        OutputStream out = new FileOutputStream("h:\\2004.xls");
+        OutputStream out = new FileOutputStream("h:\\2005.xls");
         ExcelWriter writer = EasyExcelFactory.getWriter(out, ExcelTypeEnum.XLS,true);
         //写第一个sheet, sheet1  数据全是List<String> 无模型映射关系
         Sheet sheet1 = new Sheet(1, 3);

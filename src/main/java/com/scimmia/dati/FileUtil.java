@@ -54,11 +54,11 @@ public class FileUtil {
         ExcelWriter writer = EasyExcelFactory.getWriter(out, ExcelTypeEnum.XLS,true);
         int i = 1;
         for (String k:all.keySet()){
-            Sheet sheet1 = new Sheet(i, 3);
+            Sheet sheet1 = new Sheet(i, 0);
             sheet1.setSheetName(k);
             sheet1.setAutoWidth(Boolean.TRUE);
             writer.write1(all.get(k), sheet1);
-            writer.merge(1,1,0,3);
+//            writer.merge(1,1,0,3);
             i++;
         }
         writer.finish();

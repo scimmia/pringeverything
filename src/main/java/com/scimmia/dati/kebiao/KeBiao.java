@@ -12,6 +12,20 @@ import java.util.*;
 
 public class KeBiao {
     String[] courses = new String[]{
+            "《刘建光》	刘建光",
+            "《厅堂营销活动策划实战经验交流》	李金玉",
+            "《支行业务发展策略》	韩风华",
+            "《支行精细化管理与业务拓展》	殷佳丽",
+            "《厅堂网格化营销与实战指导》	齐丽敏",
+            "《智慧厅堂建设及会计主管角色定位》	李学琪",
+            "《厅堂微沙龙实战经验分享》	王山山",
+            "《网点转型导入流程与工作要点》	王攀",
+            "《转型背景下，会计主管应该怎么干》	窦艳",
+            "《转型背景下，会计主管应该怎么干》	罗青霞",
+            "《农商行产品介绍和柜员一句话营销》	杜振",
+            "网点转型导入大讨论	班主任"
+    };
+    String[] courses0617 = new String[]{
             "《经济新常态下农商银行高质量发展应该怎么干》	闫友田",
             "《厅堂营销活动策划实战经验交流》	李金玉",
             "《支行业务发展策略》	韩风华",
@@ -28,6 +42,20 @@ public class KeBiao {
     };
 
     String[] orgs = new String[]{
+            "殷佳丽	聊城农商银行",
+            "李学琪	青岛农商银行",
+            "王山山	邹平农商银行",
+            "王攀	禹城农商银行",
+            "杜振	罗庄农商银行",
+            "班主任	省联社",
+            "李金玉	邹平农商银行",
+            "韩风华	阳谷农商银行",
+            "齐丽敏	聊城农商银行",
+            "刘建光	省联社",
+            "窦艳	省联社",
+            "罗青霞	省联社"
+    };
+    String[] orgs0617 = new String[]{
             "王纪昌	阳谷农商银行",
             "孙晓琳	聊城农商银行",
             "班主任	省联社",
@@ -55,7 +83,8 @@ public class KeBiao {
     public static void main(String[] args) {
         KeBiao k = new KeBiao();
 //        k.initCourses();
-        k.doExcel("kebiao0617.xlsx");
+//        k.doExcel("kebiao0617.xlsx","h:\\0617.xls");
+        k.doExcel("kebiao0625.xlsx","h:\\0625.xls");
     }
     HashMap<String,Course> initCourses(){
         HashMap<String,Course> al = new HashMap<>();
@@ -87,7 +116,7 @@ public class KeBiao {
         System.out.println("");
         return al;
     }
-    void doExcel(String filename){
+    void doExcel(String filename,String fileToname){
         try {
             InputStream inputStream = FileUtil.getResourcesFileInputStream(filename);
             List<Object> data = EasyExcelFactory.read(inputStream, new Sheet(1, 0));
@@ -156,7 +185,7 @@ public class KeBiao {
             LinkedHashMap<String,LinkedList<List<Object>>> teachers = buildTeachers(data);
 //            FileUtil.writeV2003a("h:\\0617teachers.xls",teachers);
             allSheet.putAll(teachers);
-            FileUtil.writeV2003a("h:\\0617.xls",allSheet);
+            FileUtil.writeV2003a(fileToname,allSheet);
 
             System.out.println("ss");
         } catch (IOException e) {
@@ -202,9 +231,16 @@ public class KeBiao {
                 }
                 String teacher = (String) m.get(2+j);
                 Course course =al.get(teacher);
-                dataLine.add(course.getName());
-                dataLine.add(course.getTeacher());
-                dataLine.add(all.getOrDefault(course.getTeacher(),new Course()).getOrg());
+//                dataLine.add(course.getName());
+                if (course != null) {
+                    dataLine.add(StringUtils.isEmpty(course.getName()) ? "" : course.getName());
+                    dataLine.add(course.getTeacher());
+                    dataLine.add(all.getOrDefault(course.getTeacher(), new Course()).getOrg());
+                }else {
+                    dataLine.add("");
+                    dataLine.add(teacher);
+                    dataLine.add("");
+                }
                 datas.add(dataLine);
             }
         }
